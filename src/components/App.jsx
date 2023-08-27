@@ -1,16 +1,17 @@
-import { Suspense, useEffect } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Layout } from 'pages/layout';
-import { Home } from 'pages/home';
-import { SignUp } from 'pages/signUp';
-import { LogIn } from 'pages/logIn';
-import { Contacts } from 'pages/contacts';
-import Error404 from 'pages/error/error';
 import { useDispatch, useSelector } from 'react-redux';
-import { refreshUser } from 'redux/operations';
-import { selectIsRefreshing } from 'redux/selectors';
 import { RestrictedRoute } from 'routeGuard/restrictedRoute';
 import { PrivateRoute } from 'routeGuard/privateRoute';
+import { refreshUser } from 'redux/operations';
+import { selectIsRefreshing } from 'redux/selectors';
+
+const Layout = lazy(() => import('pages/layout'));
+const Home = lazy(() => import('pages/home'));
+const SignUp = lazy(() => import('pages/signUp'));
+const LogIn = lazy(() => import('pages/logIn'));
+const Contacts = lazy(() => import('pages/contacts'));
+const Error404 = lazy(() => import('pages/error/error'));
 
 export const App = () => {
   const dispatch = useDispatch();

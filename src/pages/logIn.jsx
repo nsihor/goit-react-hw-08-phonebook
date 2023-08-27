@@ -1,3 +1,5 @@
 import { LogInForm } from 'components/logInForm/logInForm';
 
-export const LogIn = () => <LogInForm />;
+const LogIn = () => <LogInForm />;
+
+export default LogIn;
