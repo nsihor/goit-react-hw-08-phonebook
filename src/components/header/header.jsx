@@ -1,8 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
-import { StyledHeader, Nav, RegLinks } from './header.styled';
+import { StyledHeader, Nav, RegLinks, Btn } from './header.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsLoggedIn, selectUser } from 'redux/selectors';
-import { MainBtn } from 'main.styled';
 import { logout } from 'redux/operations';
 
 export const Header = () => {
@@ -30,9 +29,9 @@ export const Header = () => {
       ) : (
         <RegLinks>
           <p>{user.name}</p>
-          <MainBtn type="button" onClick={handleLogout}>
+          <Btn type="button" onClick={handleLogout}>
             Log out
-          </MainBtn>
+          </Btn>
         </RegLinks>
       )}
     </StyledHeader>

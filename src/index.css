@@ -17,3 +17,7 @@ code {
 a {
   color: black;
 }
+
+button {
+  cursor: pointer;
+}
