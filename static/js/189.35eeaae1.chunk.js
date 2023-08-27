@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[189],{8189:function(e,n,t){t.r(n),t.d(n,{default:function(){return u}});var r,o=t(1087),c=t(168),i=t(7686).Z.section(r||(r=(0,c.Z)(["\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n"]))),l=t(184),s=function(){return(0,l.jsxs)(i,{children:[(0,l.jsx)("h2",{children:"Hello to the Phonebook \u270c\ufe0f"}),(0,l.jsx)(o.rU,{to:"/signUp",children:"Sign Up"})]})},u=function(){return(0,l.jsx)(s,{})}}}]);
-//# sourceMappingURL=189.35eeaae1.chunk.js.map
