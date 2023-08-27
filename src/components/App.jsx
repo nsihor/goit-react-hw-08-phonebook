@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RestrictedRoute } from 'routeGuard/restrictedRoute';
 import { PrivateRoute } from 'routeGuard/privateRoute';
 import { refreshUser } from 'redux/operations';
-import { selectIsRefreshing } from 'redux/selectors';
+import { selectIsLoading, selectIsRefreshing } from 'redux/selectors';
+import { Loader } from './loader/loader';
 
 const Layout = lazy(() => import('pages/layout'));
 const Home = lazy(() => import('pages/home'));
@@ -16,6 +17,7 @@ const Error404 = lazy(() => import('pages/error/error'));
 export const App = () => {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
+  const isLoading = useSelector(selectIsLoading);
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -23,26 +25,29 @@ export const App = () => {
 
   return (
     !isRefreshing && (
-      <Suspense fallback={<div>Loading...</div>}>
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route
-              path="signUp"
-              element={<RestrictedRoute component={SignUp} />}
-            />
-            <Route
-              path="/logIn"
-              element={<RestrictedRoute component={LogIn} />}
-            />
-            <Route
-              path="contacts"
-              element={<PrivateRoute component={Contacts} />}
-            />
-            <Route path="*" element={<Error404 />} />
-          </Route>
-        </Routes>
-      </Suspense>
+      <>
+        {isLoading && <Loader />}
+        <Suspense fallback={<Loader />}>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route
+                path="signUp"
+                element={<RestrictedRoute component={SignUp} />}
+              />
+              <Route
+                path="/logIn"
+                element={<RestrictedRoute component={LogIn} />}
+              />
+              <Route
+                path="contacts"
+                element={<PrivateRoute component={Contacts} />}
+              />
+              <Route path="*" element={<Error404 />} />
+            </Route>
+          </Routes>
+        </Suspense>
+      </>
     )
   );
 };
