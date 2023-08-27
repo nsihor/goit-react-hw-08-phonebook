@@ -18,6 +18,7 @@ export const RegLinks = styled.div`
   display: flex;
   gap: 16px;
   margin-left: auto;
+  margin-right: 32px;
 `;
 
 export const Btn = styled.button`
