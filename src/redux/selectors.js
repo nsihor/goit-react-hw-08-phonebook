@@ -19,3 +19,5 @@ export const selectIsLoading = state => state.phonebook.isLoading;
 export const selectIsRefreshing = state => state.phonebook.isRefreshing;
 
 export const selectUser = state => state.phonebook.user;
+
+export const getError = state => state.phonebook.error;

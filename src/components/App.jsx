@@ -6,6 +6,7 @@ import { PrivateRoute } from 'routeGuard/privateRoute';
 import { refreshUser } from 'redux/operations';
 import { selectIsLoading, selectIsRefreshing } from 'redux/selectors';
 import { Loader } from './loader/loader';
+import { Toaster } from 'react-hot-toast';
 
 const Layout = lazy(() => import('pages/layout'));
 const Home = lazy(() => import('pages/home'));
@@ -47,6 +48,7 @@ export const App = () => {
             </Route>
           </Routes>
         </Suspense>
+        <Toaster/>
       </>
     )
   );

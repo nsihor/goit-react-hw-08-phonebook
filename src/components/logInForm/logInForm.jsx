@@ -2,9 +2,11 @@ import * as yup from 'yup';
 import { Formik, ErrorMessage } from 'formik';
 import { Label, StyledForm, StyledInput } from 'form.styled';
 import { Container, MainBtn } from 'main.styled';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { login } from 'redux/operations';
 import { Link } from 'react-router-dom';
+import { getError } from '../../redux/selectors';
+import toast from 'react-hot-toast';
 
 const schema = yup.object().shape({
   email: yup.string().required(),
@@ -13,9 +15,11 @@ const schema = yup.object().shape({
 
 export const LogInForm = () => {
   const dispatch = useDispatch();
+  const error = useSelector(getError);
 
-  const handleSubmit = values => {
+  const handleSubmit = async values => {
     dispatch(login(values));
+    error && toast.error('Invalid user data')
   };
 
   return (

@@ -16,7 +16,7 @@ export const register = createAsyncThunk(
       setToken(data.token);
       return data;
     } catch (error) {
-      return rejectWithValue(error.message);
+      return rejectWithValue(error.response.data.message);
     }
   }
 );

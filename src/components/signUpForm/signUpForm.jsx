@@ -2,21 +2,25 @@ import * as yup from 'yup';
 import { Formik, ErrorMessage } from 'formik';
 import { Label, StyledForm, StyledInput } from 'form.styled';
 import { Container, MainBtn } from 'main.styled';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { register } from 'redux/operations';
+import { getError } from '../../redux/selectors';
 import { Link } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
-  email: yup.string().required(),
-  password: yup.string().required(),
+  email: yup.string().email().required(),
+  password: yup.string().min(7).required(),
 });
 
 export const SignUpForm = () => {
   const dispatch = useDispatch();
+  const error = useSelector(getError);
 
-  const handleSubmit = values => {
-    dispatch(register(values));
+  const handleSubmit = async values => {
+    await dispatch(register(values));
+    error && error !== 'No token' && toast.error('Registration error')
   };
 
   return (
@@ -45,7 +49,7 @@ export const SignUpForm = () => {
             <StyledInput type="text" name="password" required />
           </Label>
           <ErrorMessage name="password" component="div" />
-
+          {error && error !== 'No token' && <span>{error}</span>}
           <MainBtn type="submit">Sign Up</MainBtn>
         </StyledForm>
       </Formik>

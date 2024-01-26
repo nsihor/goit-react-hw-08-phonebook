@@ -31,7 +31,7 @@ const handleFulfilled = state => {
 };
 const handleRejected = (state, { payload }) => {
   state.isLoading = false;
-  state.error = payload.error;
+  state.error = payload;
 };
 
 const contactSlice = createSlice({
