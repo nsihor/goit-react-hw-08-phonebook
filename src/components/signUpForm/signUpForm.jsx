@@ -20,7 +20,7 @@ export const SignUpForm = () => {
   const error = useSelector(getError);
 
   useEffect(() => {
-    error && error !== 'No token' && toast.error('Registration error');
+    error && error !== 'No token' && error !== 'Request failed with status code 401' && toast.error('Registration error');
   }, [error])
 
   const handleSubmit = async values => {
@@ -53,7 +53,7 @@ export const SignUpForm = () => {
             <StyledInput type="text" name="password" required />
           </Label>
           <ErrorMessage name="password" component="div" />
-          {error && error !== 'No token' && <span>{error}</span>}
+          {error && error !== 'No token' && error !== 'Request failed with status code 401' && <span>{error}</span>}
           <MainBtn type="submit">Sign Up</MainBtn>
         </StyledForm>
       </Formik>

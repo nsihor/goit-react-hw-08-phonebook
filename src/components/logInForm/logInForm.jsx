@@ -19,7 +19,7 @@ export const LogInForm = () => {
   const error = useSelector(getError);
 
   useEffect(() => {
-    error && error !== 'No token' && toast.error('Invalid user data');
+    error && error !== 'No token' && error !== 'Request failed with status code 401' && toast.error('Invalid user data');
   }, [error])
 
 
