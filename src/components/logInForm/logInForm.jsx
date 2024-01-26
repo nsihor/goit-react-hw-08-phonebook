@@ -7,6 +7,7 @@ import { login } from 'redux/operations';
 import { Link } from 'react-router-dom';
 import { getError } from '../../redux/selectors';
 import toast from 'react-hot-toast';
+import { useEffect } from 'react';
 
 const schema = yup.object().shape({
   email: yup.string().required(),
@@ -17,9 +18,13 @@ export const LogInForm = () => {
   const dispatch = useDispatch();
   const error = useSelector(getError);
 
+  useEffect(() => {
+    error && error !== 'No token' && toast.error('Invalid user data');
+  }, [error])
+
+
   const handleSubmit = async values => {
     dispatch(login(values));
-    error && toast.error('Invalid user data')
   };
 
   return (

@@ -7,6 +7,7 @@ import { register } from 'redux/operations';
 import { getError } from '../../redux/selectors';
 import { Link } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import { useEffect } from 'react';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -18,9 +19,12 @@ export const SignUpForm = () => {
   const dispatch = useDispatch();
   const error = useSelector(getError);
 
+  useEffect(() => {
+    error && error !== 'No token' && toast.error('Registration error');
+  }, [error])
+
   const handleSubmit = async values => {
     await dispatch(register(values));
-    error && error !== 'No token' && toast.error('Registration error')
   };
 
   return (
